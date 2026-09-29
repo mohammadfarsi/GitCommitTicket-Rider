@@ -1,0 +1,28 @@
+<idea-plugin>
+    <id>com.mohammadfarsi.git.commit.template</id>
+    <name>Git Commit Message Ticket Number</name>
+    <vendor email="mohammadfarsi.dev@gmail.com" url="https://github.com/mohammadfarsi">Mohammad Farsi</vendor>
+
+    <depends>com.intellij.modules.rider</depends>
+    <depends>Git4Idea</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.mohammadfarsi.gitcommitmessage.settings.CommitTemplateSettings"/>
+        <applicationConfigurable
+                instance="com.mohammadfarsi.gitcommitmessage.settings.CommitTemplateConfigurable"
+                id="git-commit-message-ticket-number"
+                displayName="Git Commit Message Ticket Number"/>
+    </extensions>
+
+    <actions>
+        <action
+                id="git-commit-message-ticket-number.InsertTicketCommitMessageAction"
+                class="com.mohammadfarsi.gitcommitmessage.action.InsertTicketCommitMessageAction"
+                text="Insert Commit Message From Branch"
+                description="Insert commit message template from current branch ticket"
+                keymap="$default">
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt K"/>
+        </action>
+    </actions>
+</idea-plugin>
