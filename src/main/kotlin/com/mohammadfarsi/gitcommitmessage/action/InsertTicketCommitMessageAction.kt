@@ -24,7 +24,7 @@ class InsertTicketCommitMessageAction : DumbAwareAction() {
         val project = e.project ?: return
         val data = Refreshable.PANEL_KEY.getData(e.dataContext)
         if (data is CommitMessageI) {
-            val branchName = GitBranchUtil.getCurrentRepository(project)?.currentBranch?.name?.trim().orEmpty()
+            val branchName = GitBranchUtil.guessRepositoryForOperation(project, e.dataContext)?.currentBranch?.name?.trim().orEmpty()
             val settings = CommitTemplateSettings.getInstance()
             try {
                 val message = CommitMessageBuilder.build(

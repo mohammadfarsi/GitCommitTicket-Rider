@@ -10,6 +10,7 @@
         <applicationService serviceImplementation="com.mohammadfarsi.gitcommitmessage.settings.CommitTemplateSettings"/>
         <applicationConfigurable
                 instance="com.mohammadfarsi.gitcommitmessage.settings.CommitTemplateConfigurable"
+                parentId="vcs"
                 id="git-commit-message-ticket-number"
                 displayName="Git Commit Message Ticket Number"/>
     </extensions>
@@ -20,6 +21,7 @@
                 class="com.mohammadfarsi.gitcommitmessage.action.InsertTicketCommitMessageAction"
                 text="Insert Commit Message From Branch"
                 description="Insert commit message template from current branch ticket"
+                icon="/icons/ticket.svg"
                 keymap="$default">
             <add-to-group group-id="Vcs.MessageActionGroup" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl shift alt K"/>

@@ -40,8 +40,8 @@ To update, install the newer zip the same way; Rider replaces the old version.
 
 Requirements:
 
-- JDK 17 or newer (`java -version` to check)
-- Rider 2026.1 installed locally (recommended), or an internet connection to download the Rider SDK
+- JDK 17 or newer to run Gradle (`java -version` to check)
+- Rider 2026.1 or newer installed locally (recommended), or an internet connection to download the Rider SDK
 
 Steps:
 
@@ -52,13 +52,16 @@ Steps:
    cd GitCommitTicket-Rider
    ```
 
-2. Point the build at your Rider installation by editing `riderHome` in `gradle.properties`:
+2. Optional: build against your local Rider instead of downloading the Rider SDK (a large download the first time).
+   Add these lines to your user-level `~/.gradle/gradle.properties` (on Windows: `%USERPROFILE%.gradlegradle.properties`), not the project file:
 
    ```properties
-   riderHome = C:/Path/To/JetBrains Rider 2026.1
+   riderHome = C:/Path/To/JetBrains Rider
+   org.gradle.java.installations.paths = C:/Path/To/JetBrains Rider/jbr
    ```
 
-   To let Gradle download the Rider SDK instead, leave the value empty (`riderHome =`). This is a large download the first time.
+   The second line lets Gradle use the Java runtime bundled with Rider for compiling. Add it if the build reports
+   `Cannot find a Java installation on your machine matching: {languageVersion=...}`.
 
 3. Build the plugin:
 
@@ -72,9 +75,13 @@ Steps:
 
 4. The installable zip is written to `build/distributions/`. Install it with the steps in [Install](#install).
 
-To try the plugin in a sandboxed Rider instance without installing it, run `gradlew runIde`.
+Other useful tasks:
+
+- `gradlew runIde` starts a sandboxed Rider with the plugin installed.
+- `gradlew verifyPlugin` runs the JetBrains Plugin Verifier, the same compatibility check JetBrains Marketplace runs on upload.
 
 ## Development
 
-- Target IDE: Rider (`RD`) 2026.1
-- Gradle 8.10.2 (via the included wrapper)
+- Target IDE: Rider (`RD`) 2026.1 and newer (`since-build` 261)
+- Build: Gradle 9.8.0 (via the included wrapper) with the IntelliJ Platform Gradle Plugin 2.x
+- Settings page: **Settings | Version Control | Git Commit Message Ticket Number**
